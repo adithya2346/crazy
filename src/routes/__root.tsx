@@ -14,6 +14,7 @@ import { useRouterState } from "@tanstack/react-router";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartProvider } from "@/lib/cart";
+import { WishlistProvider } from "@/lib/wishlist";
 import { Header, BottomNav, Footer, Blobs } from "@/components/site/Chrome";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -122,20 +123,22 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
-        {isAdmin ? (
-          <Outlet />
-        ) : (
-          <>
-            <Blobs />
-            <Header />
-            <main className="min-h-[60vh]">
-              <Outlet />
-            </main>
-            <Footer />
-            <BottomNav />
-          </>
-        )}
-        <Toaster position="top-center" />
+        <WishlistProvider>
+          {isAdmin ? (
+            <Outlet />
+          ) : (
+            <>
+              <Blobs />
+              <Header />
+              <main className="min-h-[60vh]">
+                <Outlet />
+              </main>
+              <Footer />
+              <BottomNav />
+            </>
+          )}
+          <Toaster position="top-center" />
+        </WishlistProvider>
       </CartProvider>
     </QueryClientProvider>
   );
