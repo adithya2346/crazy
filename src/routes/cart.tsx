@@ -8,7 +8,7 @@ export const Route = createFileRoute("/cart")({
   component: Cart,
 });
 
-export const shippingFor = (sub: number) => (sub === 0 || sub >= 999 ? 0 : 79);
+const shippingFor = (sub: number) => (sub === 0 || sub >= 999 ? 0 : 79);
 
 function Cart() {
   const { items, setQty, remove, subtotal } = useCart();
