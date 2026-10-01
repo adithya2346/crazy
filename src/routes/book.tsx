@@ -6,7 +6,7 @@ import { BRAND, inr, services } from "@/lib/data";
 import { PageHero } from "@/components/site/ProductCard";
 
 export const Route = createFileRoute("/book")({
-  validateSearch: (s: Record<string, unknown>) => ({ service: typeof s.service === "string" ? s.service : undefined }),
+  validateSearch: (s: Record<string, unknown>): { service?: string } => (typeof s["service"] === "string" ? { service: s["service"] } : {}),
   head: () => ({ meta: [{ title: "Book a Photoshoot — Aurelia Studio" }, { name: "description", content: "Check availability and book wedding, pre-wedding, birthday or family photography." }, { property: "og:title", content: "Book a Photoshoot — Aurelia Studio" }, { property: "og:description", content: "Request your date in under a minute." }] }),
   component: Book,
 });
@@ -21,7 +21,7 @@ const schema = z.object({
 
 function Book() {
   const { service: initial } = Route.useSearch();
-  const [service, setService] = useState(initial ?? services[0].id);
+  const [service, setService] = useState(initial ?? services[0]!.id);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [done, setDone] = useState(false);
   const s = services.find((x) => x.id === service)!;

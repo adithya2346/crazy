@@ -66,7 +66,7 @@ function Checkout() {
           <p className="text-sm font-medium">Payment</p>
           <div className="mt-2 grid grid-cols-3 gap-2">
             {[["upi", "UPI"], ["card", "Card"], ["cod", "Cash on delivery"]].map(([v, l]) => (
-              <button type="button" key={v} onClick={() => setPay(v)} className={`min-h-11 rounded-xl px-2 text-xs font-medium ${pay === v ? "bg-primary text-primary-foreground" : "border bg-card"}`}>{l}</button>
+              <button type="button" key={v} onClick={() => setPay(v!)} className={`min-h-11 rounded-xl px-2 text-xs font-medium ${pay === v ? "bg-primary text-primary-foreground" : "border bg-card"}`}>{l}</button>
             ))}
           </div>
         </div>
